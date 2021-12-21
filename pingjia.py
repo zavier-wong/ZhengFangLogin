@@ -128,8 +128,14 @@ class pj:
             }
             
             r=self.s.s.post(url,headers=head,data=data)
+            if len(r.text) > 20 :
+                print("断线重连中")
+                self.login_in()
+                print("连接成功")
+                r=self.s.s.post(url,headers=head,data=data)
             print(i['jxbmc']+r.text+'\n')
-
+            
+        print("如果提交失败请登录http://172.16.1.205/jwglxt/xtgl/login_slogin.html手动提交")
         url='http://172.16.1.205/jwglxt/xspjgl/xspj_tjXspj.html?gnmkdm=N401605&su={self.s.yhm}'
         r=self.s.s.post(url,headers=head,data=data)
         print(r.text)
